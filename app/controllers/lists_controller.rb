@@ -7,13 +7,15 @@ class ListsController < ApplicationController
   def create
     list = List.new(list_params) #データを受け取って新規登録するインスタンス
     list.save #データベースに保村
-    redirect_to '/top' # topへリダイレクト
+    redirect_to list_path(list.id) #リダイレクト
   end
 
-  def index
+  def index #一覧画面用のアクション
+    @lists = List.all #.all: テーブルの全てレコードを取得
   end
 
   def show
+    @list = List.find(params[:id]) #idカラムを参照してレコードを取得
   end
 
   def edit
