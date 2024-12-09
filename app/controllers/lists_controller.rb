@@ -19,8 +19,14 @@ class ListsController < ApplicationController
   end
 
   def edit
+    @list = List.find(params[:id]) #idカラムを参照してレコードを取得
   end
 
+  def update
+    list = List.find(params[:id]) #idカラムを参照してレコードを取得
+    list.update(list_params) #データを受け取って更新
+    redirect_to list_path(list.id) #リダイレクト
+  end
   private
   def list_params
     params.require(:list).permit(:title, :body)
